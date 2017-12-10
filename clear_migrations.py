@@ -2,7 +2,7 @@
 # @Date	: 2017-11-06
 # @Author  : DJ
 # @Desc	   : clear all app migrations
-from net_auto.wsgi import *
+from supernotes.wsgi import *
 import os
 
 if __name__ == '__main__':

@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'diary',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +78,6 @@ DATABASES = {
         'NAME': 'supernotes',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': '',
         'PORT': 5432
     }
 }

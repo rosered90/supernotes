@@ -5,10 +5,10 @@ from django.utils.encoding import python_2_unicode_compatible
 
 # Create your models here.
 @python_2_unicode_compatible
-class DiaryTattr(models.Model):
+class AccountTattr(models.Model):
     name = models.CharField(u'名称', max_length=256, unique=True)
     alias = models.CharField(u'别名', max_length=256, unique=True, blank=True, null=True)
-    type = models.ForeignKey('diarytattrtype', related_name='+', verbose_name='类型')
+    type = models.ForeignKey('AccountTattrType', related_name='+', verbose_name='类型')
     readonly = models.BooleanField(u'只读', default=False)
     require = models.BooleanField(u'必填', default=False)
     source = models.ForeignKey('contenttypes.contenttype', related_name='+', verbose_name='数据源', blank=True, null=True)
@@ -28,25 +28,25 @@ class DiaryTattr(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'diary_tattr'
-        verbose_name = u'日记分类属性'
-        verbose_name_plural = u'日记分类属性'
+        db_table = 'account_tattr'
+        verbose_name = u'账本分类属性'
+        verbose_name_plural = u'账本分类属性'
 
 
 @python_2_unicode_compatible
-class DiaryTattrType(models.Model):
+class AccountTattrType(models.Model):
     name = models.CharField(u'类型', max_length=256)
     alias = models.CharField(u'别名', max_length=256)
 
-    create_user = models.ForeignKey('auth.User', blank=True, null=True, related_name='+', verbose_name='创建人')
+    create_user = models.ForeignKey('auth.user', blank=True, null=True, related_name='+', verbose_name='创建人')
     create_date = models.DateTimeField(u'创建时间', auto_now_add=True)
-    write_user = models.ForeignKey('auth.User', blank=True, null=True, related_name='+', verbose_name='更新人')
+    write_user = models.ForeignKey('auth.user', blank=True, null=True, related_name='+', verbose_name='更新人')
     write_date = models.DateTimeField(u'更新时间', auto_now=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        db_table = 'diary_tattr_type'
-        verbose_name = u'日记属性类型'
-        verbose_name_plural = u'日记属性类型'
+        verbose_name = u'账本属性类型'
+        verbose_name_plural = u'账本属性类型'
+        db_table = 'account_tattr_type'
