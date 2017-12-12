@@ -5,18 +5,18 @@ from django.utils.encoding import python_2_unicode_compatible
 
 # Create your models here.
 @python_2_unicode_compatible
-class BillsTattr(models.Model):
+class BillTattr(models.Model):
     name = models.CharField(u'名称', max_length=256, unique=True)
     alias = models.CharField(u'别名', max_length=256, unique=True, blank=True, null=True)
-    type = models.ForeignKey('BillsTattrType', related_name='+', verbose_name='类型')
+    type = models.ForeignKey('BillTattrType', related_name='+', verbose_name=u'类型')
     readonly = models.BooleanField(u'只读', default=False)
     require = models.BooleanField(u'必填', default=False)
-    source = models.ForeignKey('contenttypes.contenttype', related_name='+', verbose_name='数据源', blank=True, null=True)
+    source = models.ForeignKey('contenttypes.contenttype', related_name='+', verbose_name=u'数据源', blank=True, null=True)
     filters = models.CharField(u'过滤器', max_length=256, blank=True, null=True)
     priority = models.IntegerField(u'优先级', default=0)
     m_view = models.BooleanField(u'主视图', default=True)
     sortable = models.BooleanField(u'排序', default=True)
-    d_type = models.ForeignKey('diary.diarytype', related_name='+', verbose_name='源模板')
+    b_type = models.ForeignKey('bill.billtype', related_name='+', verbose_name=u'源模板')
     default = models.CharField(u'默认值', max_length=256, blank=True, null=True)
 
     create_user = models.ForeignKey('auth.user', blank=True, null=True, related_name='+', verbose_name='创建人')
@@ -28,13 +28,13 @@ class BillsTattr(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'bills_tattr'
+        db_table = 'bill_tattr'
         verbose_name = u'账本分类属性'
         verbose_name_plural = u'账本分类属性'
 
 
 @python_2_unicode_compatible
-class BillsTattrType(models.Model):
+class BillTattrType(models.Model):
     name = models.CharField(u'类型', max_length=256)
     alias = models.CharField(u'别名', max_length=256)
 
@@ -49,4 +49,4 @@ class BillsTattrType(models.Model):
     class Meta:
         verbose_name = u'账本属性类型'
         verbose_name_plural = u'账本属性类型'
-        db_table = 'bills_tattr_type'
+        db_table = 'bill_tattr_type'

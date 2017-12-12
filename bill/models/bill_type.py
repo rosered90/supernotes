@@ -5,7 +5,7 @@ from django.utils.encoding import python_2_unicode_compatible
 
 # Create your models here.
 @python_2_unicode_compatible
-class BillsType(models.Model):
+class BillType(models.Model):
     name = models.CharField(u'名称', max_length=256, unique=True)
     alias = models.CharField(u'别名', max_length=256, unique=True, blank=True, null=True)
 
@@ -18,6 +18,6 @@ class BillsType(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'bills_type'
+        db_table = 'bill_type'
         verbose_name = u'账本分类'
         verbose_name_plural = u'账本分类'

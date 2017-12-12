@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 
 class AccountConfig(AppConfig):
-    name = 'bills'
+    name = 'bill'

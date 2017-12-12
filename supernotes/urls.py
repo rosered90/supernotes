@@ -16,14 +16,14 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 import diary.urls as diary_urls
-import bills.urls as bills_urls
+import bill.urls as bill_urls
 from .views import sign_in, sign_out, index
 
 urlpatterns = [
     url(r'^$', index),
     url(r'^admin/', admin.site.urls),
     url(r'^diary/', include(diary_urls.urls)),
-    url(r'^bills/', include(bills_urls.urls)),
+    url(r'^bill/', include(bill_urls.urls)),
 
     url(r'^login/', sign_in),
     url(r'^logout/', sign_out),
