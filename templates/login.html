@@ -2,11 +2,221 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>登录页面</title>
+    <!--<link rel="stylesheet" href="../static/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="../static/js/commom/jquery-1.11.1.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
+    <script src="../static/js/commom/bootstrap.min.js"></script>
+    <style>
+        .none {
+            display: none;
+        }
+        .edit_popup {
+            z-index: 100;
+            position: relative;
+            top: 100px;
+            left: 100px;
+            width: 350px;
+            padding: 42px 35px 20px;
+            background: rgba(0,0,0,0.5);
+            border: solid 1px rgba(0,0,0,0.3);
+            border-radius: 4px;
+        }
+        .btn_close{
+            font-size: 24px;
+            color: #A8A8A8;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            cursor: pointer;
+        }
+        #edit_mask {
+            position: fixed;
+            top: 0;
+            right:0;
+            bottom:0;
+            left:0;
+            width:100%;
+            height:100%;
+            opacity: 0.5;
+            background:rgb(0, 0, 0);
+            z-index: 50;
+        }
+        a {
+            text-decoration: none;
+        }
+        .trangle-wx{
+            width:0;
+            height: 0;
+            border-left:solid 50px #3FAC18;
+            border-bottom: solid 50px transparent;
+            border-right: solid 50px transparent;
+            border-top: solid 50px #3FAC18;
+            position: absolute;z-index:150;
+            left: -1px;
+            top: -1px;
+            border-radius: 4px;
+        }
+        .trangle-zh{
+            width:0;
+            height: 0;
+            border-left:solid 50px #FEC12F;
+            border-bottom: solid 50px transparent;
+            border-right: solid 50px transparent;
+            border-top: solid 50px #FEC12F;
+            position: absolute;
+            z-index:160;
+            left: -1px;
+            top: -1px;
+            border-radius: 4px;
+        }
+        .trangle-text{
+            position: absolute;
+            z-index: 200;
+            left: 0px;
+            top: 20px;
+            transform: rotate(-45deg);
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .color-white1{
+            color: #F7FAF4;
+        }
+        .color-grey{
+            color: #b5b5b5
+        }
+        .big-text{
+            width: 100%;
+            text-align: center;
+            color: #D9D9D9;
+            font-size: 24px;
+        }
+        .middle-text{
+            font-size: 20px;
+        }
+        .form-padding{
+            padding-top: 50px;
+        }
+        .input-margin-top{
+            margin-top: 20px;
+        }
+        .forget-password{
+            padding-left:170px;
+            color: #D9D9D9;
+            font-size: 18px;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+        .login-btn{
+            width: 278px;
+        }
+        .login-img{
+            width: 187px;
+            margin-left: 40px;
+        }
+        .login-wx{
+            color: #D9D9D9;
+            font-size:18px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .login-regist-text{
+            margin-top: 50px;
+            padding-left: 190px;
+        }
+        .login-regist-text a{
+            text-decoration: none;
+            font-size: 18px;
+            color: #70BDFE;
+        }
+    </style>
 </head>
 <body>
-<div>
-    欢迎登陆系统~
+<div id="edit">编辑</div>
+<div id="edit_mask" class="none"></div> <!--遮罩层-->
+<!--弹出编辑框-->
+<div class="none edit_popup">
+    <div id="wx">
+        <div class="trangle-wx"></div>
+        <div class="trangle-text color-white1">微信登录</div>
+    </div>
+    <div id="zh" style="display:none">
+        <div class="trangle-zh"></div>
+        <div class="trangle-text">账号登录</div>
+    </div>
+        <div class="btn_close">X</div>
+    <div class="big-text">
+        <span>登录</span>
+        <span class="middle-text">沙塔记账本</span>
+    </div>
+
+    <form id="zhForm" class="form-padding">
+        <div class="input-group input-group-lg">
+        <span class="input-group-addon" id="sizing-addon1">
+            <span class="glyphicon glyphicon-user color-grey" aria-hidden="true"></span>
+        </span>
+            <input type="text" class="form-control" placeholder="请输入手机号" aria-describedby="sizing-addon1">
+        </div>
+        <div class="input-group input-group-lg input-margin-top">
+        <span class="input-group-addon" id="sizing-addon2">
+            <span class="glyphicon glyphicon-lock color-grey" aria-hidden="true"></span>
+        </span>
+            <input type="text" class="form-control" placeholder="6-14位的密码" aria-describedby="sizing-addon2">
+        </div>
+        <div class="forget-password">忘记密码？</div>
+        <button type="button" class="btn btn-warning btn-lg login-btn">登录</button>
+    </form>
+    <div id="wxForm" class="form-padding" style="display: none;">
+        <img src="../images/wx.jpg" alt="" class="login-img">
+        <div class="login-wx">微信扫码登录</div>
+    </div>
+    <div class="login-regist-text">
+        <a href="#">立即注册</a>
+    </div>
 </div>
+<script type="text/javascript">
+    $(function () {
+        //    当浏览器宽度变化时，登录框适配屏幕
+        window.onresize = function(){
+            var left = ($(document).width() - parseInt($('.edit_popup').css('width'))) / 2;
+            var top=(screen.height-parseInt($('.edit_popup').css('width')))/2;
+            $('.edit_popup').css('left', left + 'px');
+            $('.edit_popup').css('top', top + 'px');
+        };
+        function bindEvents() {
+            $('#edit').on('click', edit);
+            $('.btn_close').on('click', close_edit);
+        }
+        function edit() {
+            var left = ($(document).width() - parseInt($('.edit_popup').css('width'))) / 2;
+            var top=(screen.height-parseInt($('.edit_popup').css('height')))/2;
+            $('.edit_popup').css('left', left + 'px');
+            $('.edit_popup').css('top', top + 'px');
+            $('.edit_popup').removeClass('none');
+            $('#edit_mask').removeClass('none');
+        }
+        function close_edit() {
+            $('.edit_popup').addClass('none');
+            $('#edit_mask').addClass('none');
+        }
+        bindEvents();
+
+        $('#wx').on("click",function () {
+            $('#wx').css('display','none');
+            $('#zh').css('display','block');
+            $('#zhForm').css('display','none');
+            $('#wxForm').css('display','block');
+        });
+
+        $('#zh').on("click",function () {
+            $('#zh').css('display','none');
+            $('#wx').css('display','block');
+            $('#wxForm').css('display','none');
+            $('#zhForm').css('display','block');
+
+        })
+    })
+</script>
 </body>
 </html>

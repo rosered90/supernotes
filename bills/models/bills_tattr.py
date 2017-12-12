@@ -5,10 +5,10 @@ from django.utils.encoding import python_2_unicode_compatible
 
 # Create your models here.
 @python_2_unicode_compatible
-class AccountTattr(models.Model):
+class BillsTattr(models.Model):
     name = models.CharField(u'名称', max_length=256, unique=True)
     alias = models.CharField(u'别名', max_length=256, unique=True, blank=True, null=True)
-    type = models.ForeignKey('AccountTattrType', related_name='+', verbose_name='类型')
+    type = models.ForeignKey('BillsTattrType', related_name='+', verbose_name='类型')
     readonly = models.BooleanField(u'只读', default=False)
     require = models.BooleanField(u'必填', default=False)
     source = models.ForeignKey('contenttypes.contenttype', related_name='+', verbose_name='数据源', blank=True, null=True)
@@ -28,13 +28,13 @@ class AccountTattr(models.Model):
         return self.name
 
     class Meta:
-        db_table = 'account_tattr'
+        db_table = 'bills_tattr'
         verbose_name = u'账本分类属性'
         verbose_name_plural = u'账本分类属性'
 
 
 @python_2_unicode_compatible
-class AccountTattrType(models.Model):
+class BillsTattrType(models.Model):
     name = models.CharField(u'类型', max_length=256)
     alias = models.CharField(u'别名', max_length=256)
 
@@ -49,4 +49,4 @@ class AccountTattrType(models.Model):
     class Meta:
         verbose_name = u'账本属性类型'
         verbose_name_plural = u'账本属性类型'
-        db_table = 'account_tattr_type'
+        db_table = 'bills_tattr_type'
