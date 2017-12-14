@@ -2,9 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>首页</title>
+    <!--<link rel="stylesheet" href="../static/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="../static/js/commom/jquery-1.11.1.min.js"></script>
+    <script src="../static/js/commom/bootstrap.min.js"></script>
 </head>
 <body>
-页面主页
+{% include 'nav.html' %}
+<div id="carousel-index" class="carousel slide " data-ride="carousel" data-wrap="true" data-interval="3000">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-index" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-index" data-slide-to="1"></li>
+        <li data-target="#carousel-index" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="../static/images/index/Banner1.png" alt="..." style="height: 360px;">
+        </div>
+        <div class="item">
+            <img src="../static/images/index/Banner2.jpg" alt="..." style="height: 360px;">
+        </div>
+        <div class="item">
+            <img src="../static/images/index/Banner3.png" alt="..." style="height: 360px;">
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-index" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-index" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    </a>
+</div>
+
+<div class="container-fluid" style="background-color: #F4F5F8;padding-right: 0 !important;;padding-left: 0 !important;">
+    <div class="row" style="max-width: 1480px;margin: auto;">
+        <div class="col-md-12 col-lg-10 col-lg-offset-1">
+            <div style="display: flex;flex-direction: row;flex-wrap: nowrap;align-items:flex-start;justify-content:space-between;padding-left:-15px !important;padding-right: -15px !important;">
+                <div style="width: 22%;height: 300px;background-color: yellow"></div>
+                <div style="width: 22%;height: 300px;background-color: red"></div>
+                <div style="width: 22%;height: 300px;background-color: green"></div>
+                <div style="width: 22%;height: 300px;background-color: deepskyblue"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+</script>
 </body>
 </html>

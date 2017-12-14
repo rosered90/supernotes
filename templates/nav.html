@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>头部</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <style type="text/css">
+        .mybooks-header{
+            height: 80px;
+            line-height: 80px;
+            max-width: 1480px;
+            min-width: 995px;
+            margin: auto;
+            /*background-color: pink;*/
+        }
+        .mybooks-header img{
+            height: 50px;
+        }
+        .mybooks-header ul{
+            list-style: none;
+        }
+        .mybooks-header ul li{
+            display: inline-block;
+            width: 30%;
+            text-align: center;
+        }
+
+        .mybooks-header ul li a:hover {
+            color:#F75B00;
+        }
+        .mybooks-header a{
+            font-size: 18px;
+            color: #666666;
+            text-decoration: none;
+        }
+        .mybooks-header .a{
+            border-bottom: solid 4px #F75B00;
+            padding-bottom: 25px;
+            box-sizing: border-box;
+            color:#F75B00 ;
+        }
+    </style>
+</head>
+<body>
+<div class="row mybooks-header">
+    <div class="col-md-12 col-lg-10 col-lg-offset-1">
+        <div class="row">
+            <div class="col-md-5 col-lg-5 ">
+                <img src="../static/images/stjz.jpg" alt="">
+            </div>
+            <div class="col-md-5 col-lg-5">
+                <ul>
+                    <li><a href="#" class="a">首页</a></li>
+                    <li><a href="#">我要记账</a></li>
+                    <li><a href="#">产品介绍</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2 col-lg-2" style="text-align: right">
+                    <span id="login"><a href="#">登录</a></span>
+                    <span style="margin-left: 20px;padding-top: 10px;padding-bottom: 10px;padding-left: 15px;padding-right: 15px;box-sizing: border-box;border: solid 1px  #F75B00;border-radius: 5px"><a href="#">注册</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+//    导航条
+    $(".mybooks-header ul li a").on("click",function () {
+        $(this).addClass("a");
+        $(this).parent('li').siblings().find("a").removeClass("a");
+    })
+</script>
+</body>
+</html>

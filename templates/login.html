@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>登录页面</title>
-    <!--<link rel="stylesheet" href="../static/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="../static/js/commom/jquery-1.11.1.min.js"></script>
     <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
-    <script src="9../static/js/commom/bootstrap.min.js"></script>
+    <script src="../static/js/commom/bootstrap.min.js"></script>
     <style>
         .none {
             display: none;
@@ -133,7 +133,7 @@
     </style>
 </head>
 <body>
-<div id="edit">编辑</div>
+<!--<div id="login">编辑</div>-->
 <div id="edit_mask" class="none"></div> <!--遮罩层-->
 <!--弹出编辑框-->
 <div class="none edit_popup">
@@ -168,7 +168,7 @@
         <button type="button" class="btn btn-warning btn-lg login-btn">登录</button>
     </form>
     <div id="wxForm" class="form-padding" style="display: none;">
-        <img src="../images/wx.jpg" alt="" class="login-img">
+        <img src="../static/images/wx.jpg" alt="" class="login-img">
         <div class="login-wx">微信扫码登录</div>
     </div>
     <div class="login-regist-text">
@@ -180,12 +180,12 @@
         //    当浏览器宽度变化时，登录框适配屏幕
         window.onresize = function(){
             var left = ($(document).width() - parseInt($('.edit_popup').css('width'))) / 2;
-            var top=(screen.height-parseInt($('.edit_popup').css('width')))/2;
+            var top=(screen.height-parseInt($('.edit_popup').css('height')))/2;
             $('.edit_popup').css('left', left + 'px');
             $('.edit_popup').css('top', top + 'px');
         };
         function bindEvents() {
-            $('#edit').on('click', edit);
+            $('#login').on('click', edit);
             $('.btn_close').on('click', close_edit);
         }
         function edit() {
