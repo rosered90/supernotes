@@ -9,14 +9,10 @@
     <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
     <script src="../static/js/commom/bootstrap.min.js"></script>
     <style>
-        .none {
-            display: none;
-        }
         .edit_popup {
             z-index: 100;
             position: relative;
-            top: 100px;
-            left: 100px;
+            margin: auto;
             width: 350px;
             padding: 42px 35px 20px;
             background: rgba(0,0,0,0.5);
@@ -24,27 +20,10 @@
             border-radius: 4px;
         }
         .btn_close{
-            font-size: 24px;
             color: #A8A8A8;
             position: absolute;
             right: 20px;
             top: 20px;
-            cursor: pointer;
-        }
-        #edit_mask {
-            position: fixed;
-            top: 0;
-            right:0;
-            bottom:0;
-            left:0;
-            width:100%;
-            height:100%;
-            opacity: 0.5;
-            background:rgb(0, 0, 0);
-            z-index: 50;
-        }
-        a {
-            text-decoration: none;
         }
         .trangle-wx{
             width:0;
@@ -130,78 +109,73 @@
             font-size: 18px;
             color: #70BDFE;
         }
+        .modal-content2{
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: 0 0 0 !important;
+        }
     </style>
 </head>
 <body>
-<!--<div id="login">编辑</div>-->
-<div id="edit_mask" class="none"></div> <!--遮罩层-->
-<!--弹出编辑框-->
-<div class="none edit_popup">
-    <div id="wx">
-        <div class="trangle-wx"></div>
-        <div class="trangle-text color-white1">微信登录</div>
-    </div>
-    <div id="zh" style="display:none">
-        <div class="trangle-zh"></div>
-        <div class="trangle-text">账号登录</div>
-    </div>
-        <div class="btn_close">X</div>
-    <div class="big-text">
-        <span>登录</span>
-        <span class="middle-text">沙塔记账本</span>
-    </div>
+<!--bootstrap model-->
+<!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">-->
+  <!--Launch demo modal-->
+<!--</button>-->
 
-    <form id="zhForm" class="form-padding">
-        <div class="input-group input-group-lg">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal-content2">
+        <div class="modal-body">
+            <div class=" edit_popup">
+                <div id="wx">
+                    <div class="trangle-wx"></div>
+                    <div class="trangle-text color-white1">微信登录</div>
+                </div>
+                <div id="zh" style="display:none">
+                    <div class="trangle-zh"></div>
+                    <div class="trangle-text">账号登录</div>
+                </div>
+                <div class="close btn_close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </div>
+                <div class="big-text">
+                    <span>登录</span>
+                    <span class="middle-text">沙塔记账本</span>
+                </div>
+
+                <form id="zhForm" class="form-padding">
+                    <!--{% csrf_token %}-->
+                    <div class="input-group input-group-lg">
         <span class="input-group-addon" id="sizing-addon1">
             <span class="glyphicon glyphicon-user color-grey" aria-hidden="true"></span>
         </span>
-            <input type="text" class="form-control" placeholder="请输入手机号" aria-describedby="sizing-addon1">
-        </div>
-        <div class="input-group input-group-lg input-margin-top">
+                        <input type="text" class="form-control" placeholder="请输入手机号" aria-describedby="sizing-addon1">
+                    </div>
+                    <div class="input-group input-group-lg input-margin-top">
         <span class="input-group-addon" id="sizing-addon2">
             <span class="glyphicon glyphicon-lock color-grey" aria-hidden="true"></span>
         </span>
-            <input type="text" class="form-control" placeholder="6-14位的密码" aria-describedby="sizing-addon2">
+                        <input type="text" class="form-control" placeholder="6-14位的密码" aria-describedby="sizing-addon2">
+                    </div>
+                    <div class="forget-password">忘记密码？</div>
+                    <button type="button" class="btn btn-warning btn-lg login-btn">登录</button>
+                </form>
+                <div id="wxForm" class="form-padding" style="display: none;">
+                    <img src="../static/images/wx.jpg" alt="" class="login-img">
+                    <div class="login-wx">微信扫码登录</div>
+                </div>
+                <div class="login-regist-text">
+                    <a href="#">立即注册</a>
+                </div>
+            </div>
         </div>
-        <div class="forget-password">忘记密码？</div>
-        <button type="button" class="btn btn-warning btn-lg login-btn">登录</button>
-    </form>
-    <div id="wxForm" class="form-padding" style="display: none;">
-        <img src="../static/images/wx.jpg" alt="" class="login-img">
-        <div class="login-wx">微信扫码登录</div>
     </div>
-    <div class="login-regist-text">
-        <a href="#">立即注册</a>
-    </div>
+  </div>
 </div>
+
 <script type="text/javascript">
     $(function () {
-        //    当浏览器宽度变化时，登录框适配屏幕
-        window.onresize = function(){
-            var left = ($(document).width() - parseInt($('.edit_popup').css('width'))) / 2;
-            var top=(screen.height-parseInt($('.edit_popup').css('height')))/2;
-            $('.edit_popup').css('left', left + 'px');
-            $('.edit_popup').css('top', top + 'px');
-        };
-        function bindEvents() {
-            $('#login').on('click', edit);
-            $('.btn_close').on('click', close_edit);
-        }
-        function edit() {
-            var left = ($(document).width() - parseInt($('.edit_popup').css('width'))) / 2;
-            var top=(screen.height-parseInt($('.edit_popup').css('height')))/2;
-            $('.edit_popup').css('left', left + 'px');
-            $('.edit_popup').css('top', top + 'px');
-            $('.edit_popup').removeClass('none');
-            $('#edit_mask').removeClass('none');
-        }
-        function close_edit() {
-            $('.edit_popup').addClass('none');
-            $('#edit_mask').addClass('none');
-        }
-        bindEvents();
-
+//    登陆方式切换
         $('#wx').on("click",function () {
             $('#wx').css('display','none');
             $('#zh').css('display','block');

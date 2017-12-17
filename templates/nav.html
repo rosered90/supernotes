@@ -3,49 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>头部</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <style type="text/css">
-        .mybooks-header{
+        .mybooks-header {
             height: 80px;
             line-height: 80px;
             max-width: 1480px;
             margin: auto;
-            /*background-color: pink;*/
         }
-        .mybooks-header img{
+
+        .mybooks-header img {
             height: 50px;
         }
-        .mybooks-header ul{
+
+        .mybooks-header ul {
             list-style: none;
         }
-        .mybooks-header ul li{
+
+        .mybooks-header ul li {
             display: inline-block;
             width: 30%;
             text-align: center;
         }
 
         .mybooks-header ul li a:hover {
-            color:#F75B00;
+            color: #F75B00;
         }
-        .mybooks-header a{
+
+        .mybooks-header a {
             font-size: 18px;
             color: #666666;
             text-decoration: none;
         }
-        .mybooks-header .a{
+
+        .mybooks-header .a {
             border-bottom: solid 4px #F75B00;
             padding-bottom: 25px;
             box-sizing: border-box;
-            color:#F75B00 ;
+            color: #F75B00;
         }
     </style>
 </head>
 <body>
-<div class="row mybooks-header">
+<div class="row mybooks-header" id="nav_app">
     <div class="col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
         <div class="row">
             <div class="col-sm-5 col-md-5 col-lg-5 ">
-                <img src="../static/images/stjz.jpg" alt="">
+                <img src="/static/images/stjz.jpg" alt="">
             </div>
             <div class="col-sm-5 col-md-5 col-lg-5">
                 <ul>
@@ -55,17 +59,52 @@
                 </ul>
             </div>
             <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right">
-                    <span id="login"><a href="#">登录</a></span>
-                    <span style="margin-left: 20px;padding-top: 10px;padding-bottom: 10px;padding-left: 15px;padding-right: 15px;box-sizing: border-box;border: solid 1px  #F75B00;border-radius: 5px"><a href="#">注册</a></span>
+                <span v-on:click="login" id="login" data-toggle="modal" data-target="#myModal"><a href="javascript:void 0">登录</a></span>
+                <span style="margin-left: 20px;padding-top: 10px;padding-bottom: 10px;padding-left: 15px;padding-right: 15px;box-sizing: border-box;border: solid 1px  #F75B00;border-radius: 5px"><a
+                        href="#">注册</a></span>
             </div>
         </div>
     </div>
 </div>
+<!--登陆模态框-->
+<div id="model_form"></div>
+<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
+  <!--<div class="modal-dialog" role="document">-->
+    <!--<div class="modal-content modal-content2">-->
+        <!--<div class="modal-body" id="model_form">-->
+        <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<script src="/static/js/commom/vue.js"></script>
 <script type="text/javascript">
-//    导航条
-    $(".mybooks-header ul li a").on("click",function () {
+    //    导航条选中状态
+    $(".mybooks-header ul li a").on("click", function () {
         $(this).addClass("a");
         $(this).parent('li').siblings().find("a").removeClass("a");
+    });
+    var nav_app = new Vue({
+        el: "#nav_app",
+        data: {},
+        ready: function () {
+
+        },
+        methods: {
+            login: function (e) {
+                var data = {
+                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
+                    'ids':JSON.stringify([1,2,3])
+                };
+                $.post('/login', data, function (res) {
+
+                });
+                $.get("/login", {}, function (res) {
+                    $('#model_form').empty().html(res);
+//                    $("#login").attr('data-toggle','modal');
+//                    $("#login").attr('data-target','#myModal');
+                });
+            }
+        }
     })
 </script>
 </body>

@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.db import connection
 from django.contrib.auth.decorators import login_required
 from django.apps import apps
-
+import json
 
 # Create your views here.
 def index(request):
@@ -17,6 +17,10 @@ def index(request):
 def sign_in(request, *args, **kwargs):
     password = request.POST.get('password')
     username = request.POST.get('username')
+    ids = request.POST['ids']
+    ids = request.GET['ids']
+    ids = json.loads(ids)
+    return HttpResponse(json.dumps(ids))
     user = authenticate(username=username, password=password)
     if user is not None:
         if user.is_active:
