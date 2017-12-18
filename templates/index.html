@@ -2,9 +2,238 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>首页</title>
+    <style type="text/css">
+        .index-special{
+            background-color: #F4F5F8;
+            padding-right: 0 !important;
+            padding-left: 0 !important;
+            padding-top: 20px;
+            padding-bottom: 15px;
+        }
+        .index-max-width{
+            max-width: 1480px;
+            margin: auto !important;
+        }
+        .index-special .special-flex-div{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items:flex-start;
+            justify-content:space-between;
+        }
+        .index-special .special-single{
+            width: 22%;
+            height: 300px;
+            text-align: center;
+            box-shadow: 1px 1px 6px 3px #DADBDD;
+        }
+        .index-special .special-single img{
+            height: 120px;
+            margin-top: 40px;
+        }
+        .index-special .special-single h2{
+            color: #666666;
+        }
+        .index-special .special-single p{
+            font-size: 20px;
+        }
+
+        .index-comment-head{
+            height: 150px;
+            line-height: 150px;
+        }
+        .index-comment-head .comment-hr{
+            margin-top: 75px;
+            border:solid 1px #BFBFBF;
+        }
+        .index-comment-head .comment-middle-text{
+            text-align: center;
+            color: #888888;
+            font-size: 16px;
+        }
+        .index-comment-head .comment-big-text{
+            font-size: 42px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .index-comment-photo{
+            width: 70px !important;
+        }
+        .index-comment-photo-center{
+            text-align: center;
+        }
+        .index-comment-photo-name{
+            font-size: 18px;
+            color: #333;
+            margin-top: 5px;
+        }
+        .index-comment-photo-address{
+            color: #888;
+            font-size: 14px;
+        }
+        .index-comment-photo-address img{
+            height: 20px;
+        }
+        .index-comment-single{
+            margin-bottom: 40px;
+        }
+        .index-comment-content{
+            width: 96%;
+            padding:10px 24px;
+            background-color: #FCF6DC;
+            color: #333;
+            font-size: 20px;
+            border: 1px solid #e2e2e2;
+            border-radius: 8px;
+            position: relative;
+        }
+        .index-comment-content img{
+            position: absolute;
+            left:-18px;
+            top: 20px;
+        }
+    </style>
+    <!--<link rel="stylesheet" href="../static/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="../static/js/commom/jquery-1.11.1.min.js"></script>
+    <script src="../static/js/commom/bootstrap.min.js"></script>
 </head>
 <body>
-页面主页
+{% include 'nav.html' %}
+<div id="carousel-index" class="carousel slide " data-ride="carousel" data-wrap="true" data-interval="3000">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-index" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-index" data-slide-to="1"></li>
+        <li data-target="#carousel-index" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="../static/images/index/Banner1.png" alt="...">
+        </div>
+        <div class="item">
+            <img src="../static/images/index/Banner2.jpg" alt="...">
+        </div>
+        <div class="item">
+            <img src="../static/images/index/Banner3.png" alt="...">
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-index" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-index" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    </a>
+</div>
+
+<div class="container-fluid index-special">
+    <div class="row index-max-width">
+        <div class="col-md-12 col-lg-10 col-lg-offset-1">
+            <div class="special-flex-div">
+                <div class="special-single">
+                    <img src="../static/images/index/safe.png" alt="">
+                    <h2>安全</h2>
+                    <p>信息进行加密</p>
+                </div>
+                <div class="special-single">
+                    <img src="../static/images/index/secret.png" alt="">
+                    <h2>私密</h2>
+                    <p>免实名的私密档案</p>
+                </div>
+                <div class="special-single">
+                    <img src="../static/images/index/clear.png" alt="">
+                    <h2>清晰</h2>
+                    <p>账目一目了然</p>
+                </div>
+                <div class="special-single">
+                    <img src="../static/images/index/simple.png" alt="">
+                    <h2>简单</h2>
+                    <p>简单快速注册</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row index-max-width">
+    <div class="col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+        <div class="row index-comment-head">
+            <div class="col-sm-2 col-sm-offset-2 col-md-2 col-md-offset-2 col-lg-2 col-lg-offset-2">
+                <hr class="comment-hr">
+            </div>
+            <div class="col-sm-4 col-md-4  col-lg-4 comment-middle-text">
+                超
+                <div class="comment-big-text">1,000,000</div>
+                人的选择
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <hr class="comment-hr">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row index-max-width">
+    <div class="col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+        <div class="row index-comment-single">
+            <div class="col-sm-2 col-md-2 col-lg-2 index-comment-photo-center">
+                <img src="../static/images/index/head-photo1.jpg" alt="" class="img-circle index-comment-photo">
+                <div class="index-comment-photo-name">Lucy</div>
+                <div class="index-comment-photo-address">
+                    <img src="../static/images/index/address.png" alt="">
+                    <span>上海</span>
+                    <span>UI设计师</span>
+                </div>
+            </div>
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <div class="index-comment-content">
+                    没有使用沙塔记账本记账之前，我是典型的月光族。每个月钱都不知道花到哪里去了。但自从用了沙塔记账本记账以来，我感觉每个月的钱都能花到该用的地方，很是开心。
+                    <img src="../static/images/index/trangle.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row index-comment-single">
+            <div class="col-sm-2 col-md-2 col-lg-2 index-comment-photo-center">
+                <img src="../static/images/index/head-photo2.jpg" alt="" class="img-circle index-comment-photo">
+                <div class="index-comment-photo-name">莎莎</div>
+                <div class="index-comment-photo-address">
+                    <img src="../static/images/index/address.png" alt="">
+                    <span>北京</span>
+                    <span>自由职业</span>
+                </div>
+            </div>
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <div class="index-comment-content">
+                    沙塔记账本在我用过的记账本中整体还是不错的，希望继续优化！！
+                    <img src="../static/images/index/trangle.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row index-comment-single">
+            <div class="col-sm-2 col-md-2 col-lg-2 index-comment-photo-center">
+                <img src="../static/images/index/head-photo3.jpg" alt="" class="img-circle index-comment-photo">
+                <div class="index-comment-photo-name">琳达</div>
+                <div class="index-comment-photo-address">
+                    <img src="../static/images/index/address.png" alt="">
+                    <span>广州</span>
+                    <span>教师</span>
+                </div>
+            </div>
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <div class="index-comment-content">
+                    感觉记账本很清晰，它让我喜欢上了记账，养成了记账的好习惯，这样让大大咧咧的我也渐渐地开始有存款了呢！拒做月光族，自己会继续努力的，给棒棒的自己点个大大的赞！嘿嘿！。
+                    <img src="../static/images/index/trangle.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
