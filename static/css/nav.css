@@ -1,0 +1,37 @@
+.mybooks-header {
+    height: 80px;
+    line-height: 80px;
+    max-width: 1480px;
+    margin: auto;
+}
+
+.mybooks-header img {
+    height: 50px;
+}
+
+.mybooks-header ul {
+    list-style: none;
+}
+
+.mybooks-header ul li {
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+}
+
+.mybooks-header ul li a:hover {
+    color: #F75B00;
+}
+
+.mybooks-header a {
+    font-size: 18px;
+    color: #666666;
+    text-decoration: none;
+}
+
+.mybooks-header .a {
+    border-bottom: solid 4px #F75B00;
+    padding-bottom: 25px;
+    box-sizing: border-box;
+    color: #F75B00;
+}

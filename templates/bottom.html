@@ -3,8 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style type="text/css">
+        .mybooks-header {
+            height: 80px;
+            line-height: 80px;
+            max-width: 1480px;
+            margin: auto;
+        }
+        .mybooks-bottom-big-text{
+            font-size: 20px;
+            color: #666;
+            font-weight: bold;
+            padding-bottom: 20px;
+            display: inline-block;
+        }
+        .mybooks-bottom-common-text{
+            padding-bottom: 8px;
+            color: #666;
+            font-size: 14px;
+            /*display: inline-block;*/
+        }
+    </style>
 </head>
 <body>
-页面底部
+<div class="row mybooks-header" id="nav_app">
+    <div class="col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+        <div class="row">
+            <div class="col-sm-3 col-md-3 col-lg-3" style="border-right: solid 1px #999999">
+                <!--<ul style="list-style: none;">-->
+                    <!--<li style="display: inline-block">-->
+                        <!--<a href="#" class="mybooks-bottom-big-text">关于我们</a>-->
+                        <!--<br>-->
+                        <!--<a href="#" class="mybooks-bottom-common-text">产品介绍</a>-->
+                        <!--<br>-->
+                        <!--<a href="#" class="mybooks-bottom-common-text">帮助中心</a>-->
+                    <!--</li>-->
+                    <!--<li style="display: inline-block">-->
+                        <!--<a href="#" class="mybooks-bottom-big-text">联系我们</a>-->
+                        <!--<br>-->
+                        <!--<a href="#" class="mybooks-bottom-common-text">友情链接</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+                <ul style="list-style: none;display: inline-block">
+                    <li class="mybooks-bottom-common-text">友情链接</li>
+                    <li class="mybooks-bottom-common-text">友情链接</li>
+                </ul>
+                <ul style="list-style: none;display: inline-block">
+                    <li class="mybooks-bottom-common-text">帮助中心</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

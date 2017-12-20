@@ -1,0 +1,123 @@
+.edit_popup {
+    z-index: 100;
+    position: relative;
+    margin: auto;
+    width: 350px;
+    padding: 42px 35px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: solid 1px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.btn_close {
+    color: #A8A8A8;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.trangle-wx {
+    width: 0;
+    height: 0;
+    border-left: solid 50px #3FAC18;
+    border-bottom: solid 50px transparent;
+    border-right: solid 50px transparent;
+    border-top: solid 50px #3FAC18;
+    position: absolute;
+    z-index: 150;
+    left: -1px;
+    top: -1px;
+    border-radius: 4px;
+}
+
+.trangle-zh {
+    width: 0;
+    height: 0;
+    border-left: solid 50px #FEC12F;
+    border-bottom: solid 50px transparent;
+    border-right: solid 50px transparent;
+    border-top: solid 50px #FEC12F;
+    position: absolute;
+    z-index: 160;
+    left: -1px;
+    top: -1px;
+    border-radius: 4px;
+}
+
+.trangle-text {
+    position: absolute;
+    z-index: 200;
+    left: 0px;
+    top: 20px;
+    transform: rotate(-45deg);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.color-white1 {
+    color: #F7FAF4;
+}
+
+.color-grey {
+    color: #b5b5b5
+}
+
+.big-text {
+    width: 100%;
+    text-align: center;
+    color: #D9D9D9;
+    font-size: 24px;
+}
+
+.middle-text {
+    font-size: 20px;
+}
+
+.form-padding {
+    padding-top: 50px;
+}
+
+.input-margin-top {
+    margin-top: 20px;
+}
+
+.forget-password {
+    padding-left: 170px;
+    color: #D9D9D9;
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.login-btn {
+    width: 278px;
+}
+
+.login-img {
+    width: 187px;
+    margin-left: 40px;
+}
+
+.login-wx {
+    color: #D9D9D9;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.login-regist-text {
+    margin-top: 50px;
+    padding-left: 190px;
+}
+
+.login-regist-text a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #70BDFE;
+}
+
+.modal-content2 {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: 0 0 0 !important;
+}
