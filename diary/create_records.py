@@ -32,5 +32,6 @@ class DiaryTattrsTypesDataGenerator(object):
             alias = item.get('alias')
             self.model.objects.get_or_create(name=name, alias=alias)
 
+
 def make_data():
     DiaryTattrsTypesDataGenerator().write_data()

@@ -1,7 +1,7 @@
 # coding:utf-8
 from django.shortcuts import render
 from django.http import HttpResponse
-from bill.models.bill_tattr import BillTattr
+from bill.models.bills import Bills
 from bill.models.bill_type import BillType
 
 
@@ -15,4 +15,3 @@ def bill_type(request):
     user = request.user
     objs = BillType.objects.filter(create_user=user)
     return render(request, 'bill_type_template.html', {'objs': objs})
-
