@@ -23,7 +23,7 @@ from .views import sign_in, sign_out, index
 urlpatterns = [
     url(r'^$', index),
     url(r'^admin/', admin.site.urls),
-    url(r'^base/', base_urls.urls),
+    url(r'^base/', include(base_urls.urls)),
     url(r'^diary/', include(diary_urls.urls)),
     url(r'^bill/', include(bill_urls.urls)),
 
