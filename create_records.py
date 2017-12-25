@@ -3,7 +3,7 @@
 # @Author   : DJ
 # @Desc     : create production data or setting data for supernotes
 # 本文件会调用所有app目录中create_records.py
-from net_auto.wsgi import *
+from supernotes.wsgi import *
 
 if __name__ == '__main__':
     from django.apps import apps

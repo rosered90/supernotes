@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+import base.urls as base_urls
 import diary.urls as diary_urls
 import bill.urls as bill_urls
 from .views import sign_in, sign_out, index
@@ -22,6 +23,7 @@ from .views import sign_in, sign_out, index
 urlpatterns = [
     url(r'^$', index),
     url(r'^admin/', admin.site.urls),
+    url(r'^base/', base_urls.urls),
     url(r'^diary/', include(diary_urls.urls)),
     url(r'^bill/', include(bill_urls.urls)),
 
