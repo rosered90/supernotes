@@ -29,7 +29,9 @@
     </div>
 </div>
 <!--登陆模态框-->
-<div id="model_form"></div>
+<div id="model_form">
+
+<!--</div>-->
 <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
   <!--<div class="modal-dialog" role="document">-->
     <!--<div class="modal-content modal-content2">-->
@@ -61,9 +63,10 @@
 
                 });
                 $.get("/login", {}, function (res) {
-                    $('#model_form').empty().html(res);
+                    $('#model_form').html(res);
+//                    $('#model_form').empty().html(res);
 //                    $("#login").attr('data-toggle','modal');
-//                    $("#login").attr('data-target','#myModal');
+                    $("#login").attr('data-target','#myModal');
                 });
             }
         }
