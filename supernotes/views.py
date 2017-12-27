@@ -18,9 +18,10 @@ def index(request):
 def sign_in(request, *args, **kwargs):
     # 点击登录请求模态框
     if request.method.lower() == 'get':
-        return render(request,'login.html')
+        return render(request, 'login.html')
     # 点击登录，判断用户名密码是否正确模块
     elif request.method.lower() == 'post':
+        result = {'is_success': True}
         password = request.POST.get('password')
         username = request.POST.get('username')
         user = authenticate(username=username, password=password)
@@ -30,7 +31,9 @@ def sign_in(request, *args, **kwargs):
                 login(request, user)
                 return HttpResponseRedirect('/')
         # 匹配失败，用户名或者密码错误
-        return render(request, 'login.html')
+        result['is_success'] = False
+        result['error_msg'] =u"用户名或者密码错误，请重试！"
+        return HttpResponse(json.dumps(result))
 
 
 def sign_out(request):

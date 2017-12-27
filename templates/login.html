@@ -1,25 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>登录页面</title>
-    <link rel="stylesheet" href="/static/css/common/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/css/login.css">
-    <script src="/static/js/common/jquery-1.11.1.min.js"></script>
-    <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
-    <script src="/static/js/common/bootstrap.min.js"></script>
-</head>
-<body>
-<!--bootstrap model-->
-<!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">-->
-  <!--Launch demo modal-->
-<!--</button>-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>登录页面</title>-->
+    <!--<link rel="stylesheet" href="/static/css/common/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <!--<link rel="stylesheet" href="/static/css/login.css">-->
+    <!--<script src="/static/js/common/jquery-1.11.1.min.js"></script>-->
+    <!--&lt;!&ndash;<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>&ndash;&gt;-->
+    <!--<script src="/static/js/common/bootstrap.min.js"></script>-->
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash;bootstrap model&ndash;&gt;-->
+<!--&lt;!&ndash;<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">&ndash;&gt;-->
+  <!--&lt;!&ndash;Launch demo modal&ndash;&gt;-->
+<!--&lt;!&ndash;</button>&ndash;&gt;-->
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content modal-content2">
+<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
+  <!--<div class="modal-dialog" role="document">-->
+<div id="login_module">
+    <div class="modal-content modal-content2" >
         <div class="modal-body">
+            {% csrf_token %}
             <div class=" edit_popup">
                 <div id="wx">
                     <div class="trangle-wx"></div>
@@ -43,16 +45,17 @@
         <span class="input-group-addon" id="sizing-addon1">
             <span class="glyphicon glyphicon-user color-grey" aria-hidden="true"></span>
         </span>
-                        <input type="text" class="form-control" placeholder="请输入手机号" aria-describedby="sizing-addon1">
+                        <!--<input type="text" class="form-control" placeholder="请输入手机号" aria-describedby="sizing-addon1">-->
+                        <input type="text" class="form-control" v-model="username" placeholder="请输入用户名" aria-describedby="sizing-addon1">
                     </div>
                     <div class="input-group input-group-lg input-margin-top">
         <span class="input-group-addon" id="sizing-addon2">
             <span class="glyphicon glyphicon-lock color-grey" aria-hidden="true"></span>
         </span>
-                        <input type="text" class="form-control" placeholder="6-14位的密码" aria-describedby="sizing-addon2">
+                        <input type="password" class="form-control" v-model="password" placeholder="6-14位的密码" aria-describedby="sizing-addon2">
                     </div>
                     <div class="forget-password">忘记密码？</div>
-                    <button type="button" class="btn btn-warning btn-lg login-btn">登录</button>
+                    <button type="button" class="btn btn-warning btn-lg login-btn" v-on:click="login">登录</button>
                 </form>
                 <div id="wxForm" class="form-padding" style="display: none;">
                     <img src="../static/images/wx.jpg" alt="" class="login-img">
@@ -64,8 +67,9 @@
             </div>
         </div>
     </div>
-  </div>
 </div>
+  <!--</div>-->
+<!--</div>-->
 
 <script type="text/javascript">
     $(function () {
@@ -82,9 +86,8 @@
             $('#wx').css('display','block');
             $('#wxForm').css('display','none');
             $('#zhForm').css('display','block');
-
         })
     })
 </script>
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->

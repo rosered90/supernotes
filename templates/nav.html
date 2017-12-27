@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>头部</title>
-    <link rel="stylesheet" href="/static/css/common/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/nav.css">
-</head>
-<body>
 <div class="row mybooks-header" id="nav_app">
     <div class="col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
         <div class="row">
@@ -21,56 +12,23 @@
                 </ul>
             </div>
             <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right">
-                <span v-on:click="login" id="login" data-toggle="modal" data-target="#myModal"><a href="javascript:void 0">登录</a></span>
-                <span style="margin-left: 20px;padding-top: 10px;padding-bottom: 10px;padding-left: 15px;padding-right: 15px;box-sizing: border-box;border: solid 1px  #F75B00;border-radius: 5px"><a
-                        href="#">注册</a></span>
+                <div class="btn-group">
+                    <span v-on:click="login" class="btn btn-default">登陆</span>
+                    <span class="btn btn-default">注册</span>
+                </div>
+                <!--<span v-on:click="login" id="login" data-toggle="modal" data-target="#myModal"><a href="javascript:void 0">登录</a></span>-->
+                <!--<span style="margin-left: 20px;padding-top: 10px;padding-bottom: 10px;padding-left: 15px;padding-right: 15px;box-sizing: border-box;border: solid 1px  #F75B00;border-radius: 5px"><a-->
+                        <!--href="#">注册</a></span>-->
             </div>
         </div>
     </div>
 </div>
-<!--登陆模态框-->
-<div id="model_form">
-
-<!--</div>-->
-<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
-  <!--<div class="modal-dialog" role="document">-->
-    <!--<div class="modal-content modal-content2">-->
-        <!--<div class="modal-body" id="model_form">-->
-        <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-<script src="/static/js/common/vue.js"></script>
 <script type="text/javascript">
     //    导航条选中状态
     $(".mybooks-header ul li a").on("click", function () {
         $(this).addClass("a");
         $(this).parent('li').siblings().find("a").removeClass("a");
     });
-    var nav_app = new Vue({
-        el: "#nav_app",
-        data: {},
-        ready: function () {
-
-        },
-        methods: {
-            login: function (e) {
-                var data = {
-                    'csrfmiddlewaretoken': $('input[name="csrfmiddlewaretoken"]').val(),
-                    'ids':JSON.stringify([1,2,3])
-                };
-                $.post('/login', data, function (res) {
-
-                });
-                $.get("/login", {}, function (res) {
-                    $('#model_form').html(res);
-//                    $('#model_form').empty().html(res);
-//                    $("#login").attr('data-toggle','modal');
-                    $("#login").attr('data-target','#myModal');
-                });
-            }
-        }
-    })
 </script>
 </body>
 </html>

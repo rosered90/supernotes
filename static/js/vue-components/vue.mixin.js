@@ -37,7 +37,7 @@ var dialogMixin = {
         /*
          * 设置对话内容
          */
-        _set_content: function (content_or_ajax, $modal, call_back) {
+        _set_content: function (content_or_ajax, $modal, manual, call_back) {
             // 解析content or ajax
             var ajax_url = '', ajax_params = {}, static_content = '';
             if (typeof content_or_ajax == "string") {
@@ -59,18 +59,20 @@ var dialogMixin = {
                 $.get(ajax_url, ajax_params, function (response) {
                     //响应成功
                     if (response) {
-                        $('.modal-body', $modal).html(response);
+                        if (!manual) $('.modal-body', $modal).html(response);
+                        else $('.modal-dialog', $modal).html(response);
                         if (call_back) call_back();
                     }
                     //处理响应失败
                     // $('.modal-body',self.$modal).html('请求地址'+self.ajax.url+'失败');
                 });
             } else if (static_content) {
-                $('.modal-body', $modal).html(static_content);
+                if (!manual) $('.modal-body', $modal).html(static_content);
+                else $('.modal-dialog', $modal).html(static_content);
                 if (call_back) call_back();
             }
         },
-        _create_modal: function () {
+        _create_modal: function (manual) {
             var htmls = [], self = this;
             var dialog_id = 'modal_' + (new Date()).getTime();
             // data-backdrop="static" 
@@ -78,14 +80,16 @@ var dialogMixin = {
             // style="overflow:hidden;"
             htmls.push('<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" id="' + dialog_id + '" class="modal fade" data-backdrop="static" style="display: none;">');
             htmls.push('  <div class="modal-dialog">');
-            htmls.push('    <div class="modal-content">');
-            htmls.push('      <div class="modal-header">');
-            htmls.push('        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>');
-            htmls.push('        <h4 id="myModalLabel" class="modal-title">Modal title</h4>');
-            htmls.push('      </div>');
-            htmls.push('      <div class="modal-body">');
-            htmls.push('      </div>');
-            htmls.push('    </div>');
+            if (!manual) {
+                htmls.push('    <div class="modal-content">');
+                htmls.push('      <div class="modal-header">');
+                htmls.push('        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>');
+                htmls.push('        <h4 id="myModalLabel" class="modal-title">Modal title</h4>');
+                htmls.push('      </div>');
+                htmls.push('      <div class="modal-body">');
+                htmls.push('      </div>');
+                htmls.push('    </div>');
+            }
             htmls.push('  </div>');
             htmls.push('</div>');
 
@@ -94,16 +98,14 @@ var dialogMixin = {
 
             return $modal;
         },
-        show_dialog: function (title, content_or_ajax, show_callback, hidden_callback) {
-            var self = this;
+        show_dialog: function (title, content_or_ajax, manual, show_callback, hidden_callback) {
             this.$modal_block = $('#modal_block');
             $.fn.modal.Constructor.prototype.enforceFocus = function () {
             };
 
-            var $modal = this._create_modal();
-
-            this._set_title(title, $modal);
-            this._set_content(content_or_ajax, $modal, function () {
+            var $modal = this._create_modal(manual);
+            if (!manual) this._set_title(title, $modal);
+            this._set_content(content_or_ajax, $modal, manual, function () {
                 if (show_callback) show_callback($modal);
             });
             $modal.modal('show');
@@ -332,7 +334,10 @@ var fileUploadMixin = {
                 url: '/feature/attach/upload/',
                 singleFileUploads: false,
                 formData: function () {
-                    return ([{name: 'w_replace', value: $("#replace", $modal)[0].checked},{name:'csrfmiddlewaretoken',value:$("input[name='csrfmiddlewaretoken']").val()}])
+                    return ([{name: 'w_replace', value: $("#replace", $modal)[0].checked}, {
+                        name: 'csrfmiddlewaretoken',
+                        value: $("input[name='csrfmiddlewaretoken']").val()
+                    }])
                 },
                 add: function (e, data) {
                     if (data.files.length > parseInt(limit)) {
@@ -828,7 +833,7 @@ var utilsMixin = {
                         var tmp_item = list_fields[j];
                         if (tmp_item.name.toLowerCase() == item.name.toLowerCase()) {
                             $.extend(item, tmp_item);
-                            list_fields.splice(j,1);
+                            list_fields.splice(j, 1);
                             break;
                         }
                     }
@@ -841,7 +846,7 @@ var utilsMixin = {
                         var tmp_item = list_fields[j];
                         if (tmp_item.name.toLowerCase() == item.name.toLowerCase()) {
                             $.extend(item, tmp_item);
-                            list_fields.splice(j,1);
+                            list_fields.splice(j, 1);
                             break;
                         }
                     }

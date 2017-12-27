@@ -27,6 +27,6 @@ urlpatterns = [
     url(r'^diary/', include(diary_urls.urls)),
     url(r'^bill/', include(bill_urls.urls)),
 
-    url(r'^login/', sign_in),
-    url(r'^logout/', sign_out),
+    url(r'^login/$', sign_in),
+    url(r'^logout/$', sign_out),
 ]
