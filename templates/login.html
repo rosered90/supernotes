@@ -1,27 +1,26 @@
 <!--<!DOCTYPE html>-->
 <!--<html lang="en">-->
 <!--<head>-->
-    <!--<meta charset="UTF-8">-->
-    <!--<title>登录页面</title>-->
-    <!--<link rel="stylesheet" href="/static/css/common/bootstrap.min.css">-->
-    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
-    <!--<link rel="stylesheet" href="/static/css/login.css">-->
-    <!--<script src="/static/js/common/jquery-1.11.1.min.js"></script>-->
-    <!--&lt;!&ndash;<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>&ndash;&gt;-->
-    <!--<script src="/static/js/common/bootstrap.min.js"></script>-->
+<!--<meta charset="UTF-8">-->
+<!--<title>登录页面</title>-->
+<!--<link rel="stylesheet" href="/static/css/common/bootstrap.min.css">-->
+<!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+<!--<link rel="stylesheet" href="/static/css/login.css">-->
+<!--<script src="/static/js/common/jquery-1.11.1.min.js"></script>-->
+<!--&lt;!&ndash;<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>&ndash;&gt;-->
+<!--<script src="/static/js/common/bootstrap.min.js"></script>-->
 <!--</head>-->
 <!--<body>-->
 <!--&lt;!&ndash;bootstrap model&ndash;&gt;-->
 <!--&lt;!&ndash;<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">&ndash;&gt;-->
-  <!--&lt;!&ndash;Launch demo modal&ndash;&gt;-->
+<!--&lt;!&ndash;Launch demo modal&ndash;&gt;-->
 <!--&lt;!&ndash;</button>&ndash;&gt;-->
 
 <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
-  <!--<div class="modal-dialog" role="document">-->
+<!--<div class="modal-dialog" role="document">-->
 <div id="login_module">
-    <div class="modal-content modal-content2" >
+    <div class="modal-content modal-content2">
         <div class="modal-body">
-            {% csrf_token %}
             <div class=" edit_popup">
                 <div id="wx">
                     <div class="trangle-wx"></div>
@@ -38,27 +37,52 @@
                     <span>登录</span>
                     <span class="middle-text">沙塔记账本</span>
                 </div>
-
-                <form id="zhForm" class="form-padding">
-                    <!--{% csrf_token %}-->
-                    <div class="input-group input-group-lg">
-        <span class="input-group-addon" id="sizing-addon1">
-            <span class="glyphicon glyphicon-user color-grey" aria-hidden="true"></span>
-        </span>
-                        <!--<input type="text" class="form-control" placeholder="请输入手机号" aria-describedby="sizing-addon1">-->
-                        <input type="text" class="form-control" v-model="username" placeholder="请输入用户名" aria-describedby="sizing-addon1">
-                    </div>
-                    <div class="input-group input-group-lg input-margin-top">
-        <span class="input-group-addon" id="sizing-addon2">
-            <span class="glyphicon glyphicon-lock color-grey" aria-hidden="true"></span>
-        </span>
-                        <input type="password" class="form-control" v-model="password" placeholder="6-14位的密码" aria-describedby="sizing-addon2">
-                    </div>
-                    <div class="forget-password">忘记密码？</div>
-                    <button type="button" class="btn btn-warning btn-lg login-btn" v-on:click="login">登录</button>
-                </form>
+                <validator name="validation">
+                    <form id="zhForm" class="form-padding">
+                        {% csrf_token %}
+                        <div class="input-group input-group-lg">
+                        <span class="input-group-addon" id="sizing-addon1">
+                            <span class="glyphicon glyphicon-user color-grey" aria-hidden="true"></span>
+                        </span>
+                            <!--<input type="text" class="form-control" placeholder="请输入手机号" aria-describedby="sizing-addon1">-->
+                            <input type="text" class="form-control"
+                                   v-model="username"
+                                   placeholder="请输入用户名"
+                                   id="username"
+                                   name="username"
+                                   v-validate:username="{required:{rule:true,message:'请填写用户名！'}}"
+                                   aria-describedby="sizing-addon1"
+                            >
+                        </div>
+                        <div v-if="$validation.username" class="col-md-offset-3">
+                            <div v-if="$validation.username.required" class="text-danger">
+                                {$ $validation.username.required $}
+                            </div>
+                        </div>
+                        <div class="input-group input-group-lg input-margin-top">
+                            <span class="input-group-addon" id="sizing-addon2">
+                                <span class="glyphicon glyphicon-lock color-grey" aria-hidden="true"></span>
+                            </span>
+                            <input type="password" class="form-control"
+                                   v-model="password"
+                                   placeholder="请输入用户名"
+                                   id="password"
+                                   name="password"
+                                   v-validate:password="{required:{rule:true,message:'请输入密码！'}}"
+                                   aria-describedby="sizing-addon2"
+                            >
+                        </div>
+                        <div v-if="$validation.password" class="col-md-offset-3">
+                            <div v-if="$validation.password.required" class="text-danger">
+                                {$ $validation.password.required $}
+                            </div>
+                        </div>
+                        <div class="forget-password"><span class="btn">忘记密码？</span></div>
+                        <button type="button" class="btn btn-warning btn-lg login-btn" v-on:click="login">登录</button>
+                    </form>
+                </validator>
                 <div id="wxForm" class="form-padding" style="display: none;">
-                    <img src="../static/images/wx.jpg" alt="" class="login-img">
+                    <img src="/static/images/wx.jpg" alt="" class="login-img">
                     <div class="login-wx">微信扫码登录</div>
                 </div>
                 <div class="login-regist-text">
@@ -68,24 +92,24 @@
         </div>
     </div>
 </div>
-  <!--</div>-->
+<!--</div>-->
 <!--</div>-->
 
 <script type="text/javascript">
     $(function () {
 //    登陆方式切换
-        $('#wx').on("click",function () {
-            $('#wx').css('display','none');
-            $('#zh').css('display','block');
-            $('#zhForm').css('display','none');
-            $('#wxForm').css('display','block');
+        $('#wx').on("click", function () {
+            $('#wx').css('display', 'none');
+            $('#zh').css('display', 'block');
+            $('#zhForm').css('display', 'none');
+            $('#wxForm').css('display', 'block');
         });
 
-        $('#zh').on("click",function () {
-            $('#zh').css('display','none');
-            $('#wx').css('display','block');
-            $('#wxForm').css('display','none');
-            $('#zhForm').css('display','block');
+        $('#zh').on("click", function () {
+            $('#zh').css('display', 'none');
+            $('#wx').css('display', 'block');
+            $('#wxForm').css('display', 'none');
+            $('#zhForm').css('display', 'block');
         })
     })
 </script>

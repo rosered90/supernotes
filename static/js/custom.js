@@ -1,7 +1,7 @@
 /*
 自定义js，用于加载一些界面上自定义的js事件及其驱动。
  */
-
+Vue.config.delimiters = ["{$", "$}"];
 var nav_app = new Vue({
     el: '#nav_app',
     mixins: [dialogMixin],
@@ -29,6 +29,9 @@ var nav_app = new Vue({
                                     console.log(result.traceback);
                                 }
                             })
+                        },
+                        register:function (e) {
+                            alert('注册模块，需要跳转URL')
                         }
                     }
                 })
