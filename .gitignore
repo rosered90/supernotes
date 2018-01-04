@@ -96,5 +96,6 @@ ENV/
 /site
 
 # mypy
+.idea
 .mypy_cache/
 */migrations/0*
