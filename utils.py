@@ -5,6 +5,7 @@
 from django.http import HttpResponse
 import traceback, json
 
+
 def try_except_func(func):
     '''
     try catch 模块的装饰器
@@ -28,6 +29,8 @@ def try_except_func(func):
             return HttpResponse(json.dumps(result))
 
     return wrapper
+
+
 def try_except_class(func):
     '''
     try catch 模块的装饰器
@@ -54,4 +57,10 @@ def try_except_class(func):
 
 
 def _convert_utf8(txt):
-    pass
+    '''
+    强制转换成utf-8编码
+    '''
+    if txt and isinstance(txt, str):
+        return txt.decode('utf-8')
+    else:
+        return txt
