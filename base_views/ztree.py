@@ -13,3 +13,6 @@ class zTreeBaseView(SingleObjectView):
     @try_except_class
     def create_post(self, request, *args, **kwargs):
         pass
+
+    def save_callback(self, request, *args, **kwargs):
+        pass

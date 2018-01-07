@@ -41,17 +41,17 @@ class SingleObjectView(object):
         DT_VIEW = 'WRITE'
 
     url定义应为成组出现，也可以根据需求注册url,不需要的则不注册
-    from base.views.menu import MenuView
-    menu_view = MenuView()
+    import base.views.menu_views as menu_view
+    menu = menu_view.MenuView()
     urlpatterns = [
-        url(r'^menu/$', menu_view.dt_list),
-        url(r'^menu/search/$', menu_view.search),
-        url(r'^menu/s2read/$', menu_view.s2read),
-        url(r'^menu/s2search/$', menu_view.s2search),
-        url(r'^menu/create/$', menu_view.create),
-        url(r'^menu/update/(?P<pk>\w+)/$', menu_view.update),
-        url(r'^menu/delete/(?P<pk>\w+)/$', menu_view.delete),
-        url(r'^menu/batch_delete/$', menu_view.batch_delete),
+        url(r'^menu/$', menu.dt_list),
+        url(r'^menu/search/$', menu.search),
+        url(r'^menu/s2read/$', menu.s2read),
+        url(r'^menu/s2search/$', menu.s2search),
+        url(r'^menu/create/$', menu.create),
+        url(r'^menu/update/(?P<pk>\w+)/$', menu.update),
+        url(r'^menu/delete/(?P<pk>\w+)/$', menu.delete),
+        url(r'^menu/batch_delete/$', menu.batch_delete),
     ]
 
     '''

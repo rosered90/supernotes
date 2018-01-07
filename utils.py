@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # author: DJ
-# date: 2018/01/03
+# date: 2018-01-03
 # desc: this is a tool file, supported usefull tool functions.
 from django.http import HttpResponse
 import traceback, json
