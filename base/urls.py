@@ -6,6 +6,8 @@ user = user_views.UserView()
 urlpatterns = [
     url(r'^login/$', user.login),
     url(r'^logout/$', user.logout),
+
+    url(r'^register/$', user.create),
 ]
 
 urls = urlpatterns

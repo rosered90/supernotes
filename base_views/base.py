@@ -80,13 +80,8 @@ class SingleObjectView(object):
         当HTTP请求为get时将返回HTML代码段
         当HTTP请求为post时将数据保存到数据库并返回新建数据的ID
         '''
-        action = 'create'
-        method = request.method.lower()
-        if method in self.http_method_names:
-            method_func = getattr(self, action + '_' + method)
-            return method_func(request, *args, **kwargs)
-        else:
-            return self.http_method_not_allowed(request, *args, **kwargs)
+        kwargs['action'] = 'create'
+        return self._analy_request(request,*args,**kwargs)
 
     def create_get(self, request, *args, **kwargs):
         return render(request, self.create_template)
@@ -100,13 +95,8 @@ class SingleObjectView(object):
         当HTTP请求为get时将返回HTML代码段
         当HTTP请求为post时从url获取更新的id，将数据保存到数据库并返回当前数据的ID
         '''
-        action = 'update'
-        method = request.method.lower()
-        if method in self.http_method_names:
-            method_func = getattr(self, action + '_' + method)
-            return method_func(request, *args, **kwargs)
-        else:
-            return self.http_method_not_allowed(request, *args, **kwargs)
+        kwargs['action'] = 'update'
+        return self._analy_request(request, *args, **kwargs)
 
     def update_get(self, request, *args, **kwargs):
         return render(request, self.update_template)
@@ -294,6 +284,15 @@ class SingleObjectView(object):
             'error_msg': u'不支持的请求方式!'
         }
         return HttpResponse(json.dumps(result))
+
+    def _analy_request(self, request, *args, **kwargs):
+        action = kwargs.get('action')
+        method = request.method.lower()
+        if method in self.http_method_names:
+            method_func = getattr(self, action + '_' + method)
+            return method_func(request, *args, **kwargs)
+        else:
+            return self.http_method_not_allowed(request, *args, **kwargs)
 
     def http_method_not_allowed(self, request, *args, **kwargs):
         logger.warning(

@@ -12,17 +12,25 @@
                 </ul>
             </div>
             <div class="col-sm-2 col-md-2 col-lg-2" style="text-align: right">
-                {% if request.user.id %}
-                    <span>{{ request.user.name }}</span>
+                {% if request.user.is_authenticated %}
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{ request.user.first_name }}
+                    </button>
+                    <span><a href="/base/logout/">退出登陆</a></span>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="/base/logout/">退出登陆</a>
+                    </div>
+                </div>
                 {% else %}
                 <div class="btn-group">
                     <span v-on:click="login" class="btn btn-default">登陆</span>
                     <span v-on:click="register" class="btn btn-default">注册</span>
                 </div>
                 {% endif %}
-                <!--<span v-on:click="login" id="login" data-toggle="modal" data-target="#myModal"><a href="javascript:void 0">登录</a></span>-->
-                <!--<span style="margin-left: 20px;padding-top: 10px;padding-bottom: 10px;padding-left: 15px;padding-right: 15px;box-sizing: border-box;border: solid 1px  #F75B00;border-radius: 5px"><a-->
-                        <!--href="#">注册</a></span>-->
             </div>
         </div>
     </div>

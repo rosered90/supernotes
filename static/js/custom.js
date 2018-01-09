@@ -27,15 +27,29 @@ var nav_app = new Vue({
                                 if (!result.is_success) {
                                     alert(result.error_msg);
                                     console.log(result.traceback);
+                                } else {
+                                    window.location.href = result.url
                                 }
                             })
-                        },
-                        register:function (e) {
-                            alert('注册模块，需要跳转URL')
                         }
+
                     }
                 })
             })
+        },
+        register: function (e) {
+            alert('注册模块，需要跳转URL');
+            // this.show_dialog('注册','/base/register/',function () {
+            //     var register_app = new Vue({
+            //         el:'#register_module',
+            //         data:{},
+            //         method:{
+            //             submit:function (e) {
+            //                 e.preventDefault();
+            //             }
+            //         }
+            //     })
+            // })
         }
 
     }

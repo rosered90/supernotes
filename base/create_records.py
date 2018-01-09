@@ -43,10 +43,10 @@ class KVPairDataGenerator(object):
             {'name': u'账户类型', 'alias': 'AccountType'}
         ]
         self.kvpairs = [
-            {'kvinfo': 'AccountType', 'name': u'默认账户', 'alias': 'Default'},
-            {'kvinfo': 'AccountType', 'name': u'银行卡账户', 'alias': 'Card'},
-            {'kvinfo': 'AccountType', 'name': u'支付宝账户', 'alias': 'Alipay'},
-            {'kvinfo': 'AccountType', 'name': u'微信账户', 'alias': 'Wechat'}
+            {'info': 'AccountType', 'name': u'默认账户', 'alias': 'Default'},
+            {'info': 'AccountType', 'name': u'银行卡账户', 'alias': 'Card'},
+            {'info': 'AccountType', 'name': u'支付宝账户', 'alias': 'Alipay'},
+            {'info': 'AccountType', 'name': u'微信账户', 'alias': 'Wechat'}
         ]
 
     def write_data(self):
@@ -59,13 +59,23 @@ class KVPairDataGenerator(object):
         for item in self.kvpairs:
             name = item.get('name')
             alias = item.get('alias')
-            kvinfo = item.get('kvinfo')
+            kvinfo = item.get('info')
             kvinfo_obj = kvinfo_dict.get(kvinfo)
-            item['kvinfo'] = kvinfo_obj
+            item['info'] = kvinfo_obj
             self.model.objects.get_or_create(name=name, defaults=item)
 
 
+def create_superuser():
+    from django.contrib.auth.models import User
+    user_obj = User.objects.get_or_create(username='admin', first_name=u'管理员', is_superuser=True)[0]
+    user_obj.set_password('admin')
+    user_obj.save()
+
+
 def make_data():
+    # 创建初始账户
+    create_superuser()
+
     # 创建初始菜单
     MenuDataGenerator().write_data()
 

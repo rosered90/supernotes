@@ -17,13 +17,11 @@ class UserView(SingleObjectView):
     dt_template = 'user_template.html'
 
     def login(self, request, *args, **kwargs):
-        method = request.method.lower()
-        if method == 'get':
-            return render(request, 'login.html')
-        elif method == 'post':
-            return self.login_post(request, *args, **kwargs)
-        else:
-            return self.unsupported_method(request, *args, **kwargs)
+        kwargs['action'] = 'login'
+        return self._analy_request(request, *args, **kwargs)
+
+    def login_get(self, request, *args, **kwargs):
+        return render(request, 'login.html')
 
     def login_post(self, request, *args, **kwargs):
         result = {'is_success': True}
@@ -40,11 +38,11 @@ class UserView(SingleObjectView):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(url)
-
-        # 匹配失败，用户名或者密码错误
-        result['is_success'] = False
-        result['error_msg'] = u"用户名或者密码错误，请重试！"
+                result['url'] = url
+        else:
+            # 匹配失败，用户名或者密码错误
+            result['is_success'] = False
+            result['error_msg'] = u"用户名或者密码错误，请重试！"
         return HttpResponse(json.dumps(result))
 
     def logout(self, request, *args, **kwargs):
@@ -54,3 +52,14 @@ class UserView(SingleObjectView):
         url = '/'
         logout(request)
         return HttpResponseRedirect(url)
+
+    def register(self, request, *args, **kwargs):
+        kwargs['action'] = 'register'
+        return self._analy_request(request, *args, **kwargs)
+
+    def register_get(self, request, *args, **kwargs):
+        return render(request, 'register.html')
+
+    @try_except_class
+    def register_post(self, request, *args, **kwargs):
+        return HttpResponse
