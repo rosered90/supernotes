@@ -7,7 +7,7 @@ var nav_app = new Vue({
     mixins: [dialogMixin],
     methods: {
         login: function (e) {
-            var $modal = this.show_dialog('登陆', '/login', true, function () {
+            var $modal = this.show_dialog('登陆', '/base/login/', true, function () {
                 var login_app = new Vue({
                     el: '#login_module',
                     data: {
@@ -22,7 +22,7 @@ var nav_app = new Vue({
                                 'password': this.password
                             };
                             // todo 加上必填等表单校验，校验通过则发起请求
-                            $.post('/login/', data, function (res) {
+                            $.post('/base/login/', data, function (res) {
                                 var result = JSON.parse(res);
                                 if (!result.is_success) {
                                     alert(result.error_msg);
