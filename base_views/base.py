@@ -4,9 +4,12 @@
 # desc: this is a single model operate class ,include search,modify,add,delete action.
 from django.shortcuts import render
 from django.views.generic.edit import ModelFormMixin
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotAllowed
 from utils import try_except_class
-import json
+
+import json, logging
+
+logger = logging.getLogger('django.request')
 
 
 # Create your views here.
@@ -60,6 +63,16 @@ class SingleObjectView(object):
     create_template = None
     update_template = None
     DT_VIEW = "READ"
+    http_method_names = ['get', 'post']
+
+    def dt_list(self, request, *args, **kwargs):
+        init_kwargs = {
+            'model': self.model,
+            'DT_VIEW': self.DT_VIEW,
+            'dt_template': self.dt_template
+        }
+
+        return
 
     def create(self, request, *args, **kwargs):
         '''
@@ -67,13 +80,13 @@ class SingleObjectView(object):
         当HTTP请求为get时将返回HTML代码段
         当HTTP请求为post时将数据保存到数据库并返回新建数据的ID
         '''
+        action = 'create'
         method = request.method.lower()
-        if method == 'get':
-            return self.create_get(request, *args, **kwargs)
-        elif method == 'post':
-            return self.create_post(request, *args, **kwargs)
+        if method in self.http_method_names:
+            method_func = getattr(self, action + '_' + method)
+            return method_func(request, *args, **kwargs)
         else:
-            return self.unsupported_method(request, *args, **kwargs)
+            return self.http_method_not_allowed(request, *args, **kwargs)
 
     def create_get(self, request, *args, **kwargs):
         return render(request, self.create_template)
@@ -82,13 +95,18 @@ class SingleObjectView(object):
         return HttpResponse
 
     def update(self, request, *args, **kwargs):
+        '''
+        更新请求的响应，将请求分为get和post两种方式处理，其他方式不处理，将给请求端报错
+        当HTTP请求为get时将返回HTML代码段
+        当HTTP请求为post时从url获取更新的id，将数据保存到数据库并返回当前数据的ID
+        '''
+        action = 'update'
         method = request.method.lower()
-        if method == 'get':
-            return self.update_get(request, *args, **kwargs)
-        elif method == 'post':
-            return self.update_post(request, *args, **kwargs)
+        if method in self.http_method_names:
+            method_func = getattr(self, action + '_' + method)
+            return method_func(request, *args, **kwargs)
         else:
-            return self.unsupported_method(request, *args, **kwargs)
+            return self.http_method_not_allowed(request, *args, **kwargs)
 
     def update_get(self, request, *args, **kwargs):
         return render(request, self.update_template)
@@ -265,7 +283,8 @@ class SingleObjectView(object):
 
         pass
 
-    def unsupported_method(self,request, *args, **kwargs):
+    # 暂时废弃
+    def unsupported_method(self, request, *args, **kwargs):
         '''
         用于处理不支持的请求，返回报错信息
         request,*args,**kwargs后期有可能有用，也可能没用
@@ -275,6 +294,16 @@ class SingleObjectView(object):
             'error_msg': u'不支持的请求方式!'
         }
         return HttpResponse(json.dumps(result))
+
+    def http_method_not_allowed(self, request, *args, **kwargs):
+        logger.warning(
+            'Method Not Allowed (%s): %s', request.method, request.path,
+            extra={'status_code': 405, 'request': request}
+        )
+        return HttpResponseNotAllowed(self._allowed_methods())
+
+    def _allowed_methods(self):
+        return [m.upper() for m in self.http_method_names if hasattr(self, m)]
 
     def _convert_utf8(self, txt):
         '''
